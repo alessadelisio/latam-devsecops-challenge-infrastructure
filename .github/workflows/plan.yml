@@ -34,6 +34,11 @@ jobs:
         env:
           TF_VAR_project_id: ${{ vars.project_id }}
           TF_VAR_region: ${{ vars.region }}
+          TF_VAR_table_id: ${{ vars.table_id }}
+          TF_VAR_schema: ${{ vars.schema }}
+          TF_VAR_topic_name: ${{ vars.topic_name }}
+          TF_VAR_topic_name_subscription: ${{ vars.topic_name_subscription }}
+          TF_VAR_dataset_id: ${{ vars.dataset_id }}
 
       - name: "Save Artifact"
         id: save-artifact
