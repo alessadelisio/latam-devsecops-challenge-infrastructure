@@ -1,0 +1,66 @@
+name: "Terraform Apply"
+
+on:
+  pull_request:
+    types: [labeled]
+
+env:
+  TERRAFORM_VERSION: "1.5.5"
+
+jobs:
+  terraform-apply:
+    name: "Terraform Apply"
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'ready'
+
+    permissions:
+      pull-requests: write
+      contents: write
+      id-token: write
+
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+
+      - name: "Authenticate"
+        uses: "google-github-actions/auth@v2"
+        with:
+          service_account: ${{ secrets.TERRAFORM_SA }}
+          credentials_json: ${{ secrets.TERRAFORM_CREDENTIALS }}
+
+      - name: "Setup Terraform"
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: "Terraform Init"
+        id: init
+        run: terraform init
+
+      - name: "Download Plan"
+        id: download-plan
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          workflow: plan.yml
+          pr: ${{ github.event.pull_request.number }}
+          name: ${{ github.event.pull_request.number }}-terraform-plan
+          path: ./plan
+
+      - name: "Terraform Apply"
+        id: apply
+        working-directory: .
+        shell: bash
+        run: make apply
+
+        env:
+          TF_VAR_project_id: ${{ vars.project_id }}
+          TF_VAR_region: ${{ vars.region }}
+
+      - name: "Remove 'ready' label if Apply fails"
+        if: failure()
+        uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          labels: |
+            ready

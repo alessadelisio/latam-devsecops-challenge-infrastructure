@@ -1,0 +1,4 @@
+# Labeling as "ready" every single Pull Request.
+ready:
+  - changed-files:
+      - any-glob-to-any-file: "**"
