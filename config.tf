@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.5.5"
 
   backend "gcs" {
-    bucket = "devsecops-challenge_terraform-state"
+    bucket = "latam-devsecops-challenge_terraform-state"
     prefix = "state"
   }
 
