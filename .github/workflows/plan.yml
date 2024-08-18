@@ -1,0 +1,58 @@
+name: "Terraform Plan"
+
+on:
+  pull_request:
+
+env:
+  TERRAFORM_VERSION: "1.5.5"
+
+jobs:
+  terraform-plan:
+    name: "Terraform Plan"
+    runs-on: ubuntu-latest
+    if: github.event.review.state != 'approved'
+
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+
+      - name: "Authenticate"
+        uses: "google-github-actions/auth@v2"
+        with:
+          service_account: ${{ secrets.TERRAFORM_SA }}
+          credentials_json: ${{ secrets.TERRAFORM_CREDENTIALS }}
+
+      - name: "Setup Terraform"
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: "Terraform Plan"
+        id: plan
+        run: make plan
+
+        env:
+          TF_VAR_project_id: ${{ vars.project_id }}
+          TF_VAR_region: ${{ vars.region }}
+
+      - name: "Save Artifact"
+        id: save-artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.number }}-terraform-plan
+          path: ./plan/tfplan
+
+  label-pr:
+    name: "Label Pull Request"
+    needs: terraform-plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+
+      - name: "Label Pull Request"
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GH_TOKEN }}
+          configuration-path: ".github/label.yml"
