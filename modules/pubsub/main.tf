@@ -1,8 +1,8 @@
-data "google_project" "latam-challenge" {
+data "google_project" "latam_challenge" {
   project_id = var.project_id
 }
 
-resource "google_pubsub_schema" "challenge-schema" {
+resource "google_pubsub_schema" "challenge_schema" {
   project = var.project_id
   name    = var.schema
   type    = "AVRO"
@@ -29,8 +29,8 @@ resource "google_pubsub_schema" "challenge-schema" {
 EOF
 }
 
-resource "google_pubsub_topic" "pubsub-data-topic" {
-  depends_on = [google_pubsub_schema.challenge-schema]
+resource "google_pubsub_topic" "pubsub_data_topic" {
+  depends_on = [google_pubsub_schema.challenge_schema]
 
   project = var.project_id
   name    = var.topic_name
@@ -41,12 +41,12 @@ resource "google_pubsub_topic" "pubsub-data-topic" {
   }
 }
 
-resource "google_pubsub_subscription" "pubsub-data-topic-subscription" {
+resource "google_pubsub_subscription" "pubsub_data_topic_subscription" {
   depends_on = [google_project_iam_member.viewer, google_project_iam_member.editor]
 
   project = var.project_id
   name    = var.topic_name_subscription
-  topic   = google_pubsub_topic.pubsub-data-topic.id
+  topic   = google_pubsub_topic.pubsub_data_topic.id
 
   bigquery_config {
     table = var.table_id
@@ -54,13 +54,13 @@ resource "google_pubsub_subscription" "pubsub-data-topic-subscription" {
 }
 
 resource "google_project_iam_member" "viewer" {
-  project = data.google_project.latam-challenge.project_id
+  project = data.google_project.latam_challenge.project_id
   role    = "roles/bigquery.metadataViewer"
-  member  = "serviceAccount:service-${data.google_project.latam-challenge.number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+  member  = "serviceAccount:service-${data.google_project.latam_challenge.number}@gcp-sa-pubsub.iam.gserviceaccount.com"
 }
 
 resource "google_project_iam_member" "editor" {
-  project = data.google_project.latam-challenge.project_id
+  project = data.google_project.latam_challenge.project_id
   role    = "roles/bigquery.dataEditor"
-  member  = "serviceAccount:service-${data.google_project.latam-challenge.number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+  member  = "serviceAccount:service-${data.google_project.latam_challenge.number}@gcp-sa-pubsub.iam.gserviceaccount.com"
 }

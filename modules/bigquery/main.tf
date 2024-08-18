@@ -1,12 +1,12 @@
-resource "google_bigquery_dataset" "challenge-dataset" {
+resource "google_bigquery_dataset" "challenge_dataset" {
   project    = var.project_id
   dataset_id = var.dataset_id
   location   = var.region
 }
 
-resource "google_bigquery_table" "challenge-table" {
+resource "google_bigquery_table" "challenge_table" {
   project    = var.project_id
-  dataset_id = google_bigquery_dataset.challenge-dataset.dataset_id
+  dataset_id = google_bigquery_dataset.challenge_dataset.dataset_id
   table_id   = var.table_id
 
   deletion_protection = false
@@ -46,9 +46,9 @@ resource "google_bigquery_table" "challenge-table" {
 EOF
 }
 
-resource "google_bigquery_table" "challenge-table-view" {
+resource "google_bigquery_table" "challenge_table_view" {
   project    = var.project_id
-  dataset_id = google_bigquery_dataset.challenge-dataset.dataset_id
+  dataset_id = google_bigquery_dataset.challenge_dataset.dataset_id
   table_id   = "devsecops-table-view"
 
   deletion_protection = false
@@ -60,7 +60,7 @@ resource "google_bigquery_table" "challenge-table-view" {
       CAST(JSON_EXTRACT_SCALAR(CAST(data AS STRING), "$.EmpSalary") AS INT64) AS EmpSalary,
       JSON_EXTRACT_SCALAR(CAST(data AS STRING), "$.EmpPhoneNo") AS EmpPhoneNo
     FROM
-      ${var.project_id}.${google_bigquery_dataset.challenge-dataset.dataset_id}.${google_bigquery_table.challenge-table.table_id} ⁠
+      ${var.project_id}.${google_bigquery_dataset.challenge_dataset.dataset_id}.${google_bigquery_table.challenge_table.table_id} ⁠
     EOF
     use_legacy_sql = false
   }
