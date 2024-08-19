@@ -23,3 +23,17 @@ module "devsecops_pubsub" {
   topic_name              = var.topic_name
   topic_name_subscription = var.topic_name_subscription
 }
+
+module "devsecops_repository" {
+  source = "./modules/artifact_registry"
+
+  region        = var.region
+  repository_id = var.repository_id
+}
+
+module "devsecops_service_account" {
+  source = "./modules/iam"
+
+  project_id         = var.project_id
+  service_account_id = var.service_account_id
+}
