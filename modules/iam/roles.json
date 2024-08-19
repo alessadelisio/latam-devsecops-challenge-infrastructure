@@ -1,0 +1,23 @@
+[
+  "roles/artifactregistry.admin",
+  "roles/run.admin",
+  "roles/run.invoker",
+  "roles/run.serviceAgent",
+  "roles/logging.viewer",
+  "roles/iam.serviceAccountTokenCreator",
+  "roles/serviceusage.serviceUsageConsumer",
+  "roles/firebase.admin",
+  "roles/cloudfunctions.admin",
+  "roles/secretmanager.admin",
+  "roles/storage.admin",
+  "roles/iam.serviceAccountUser",
+  "roles/storage.objectAdmin",
+  "roles/pubsub.admin",
+  "roles/pubsub.editor",
+  "roles/pubsub.publisher",
+  "roles/bigquery.admin",
+  "roles/bigquery.dataEditor",
+  "roles/bigquery.metadataViewer",
+  "roles/bigquery.user",
+  "roles/bigquery.jobUser"
+]

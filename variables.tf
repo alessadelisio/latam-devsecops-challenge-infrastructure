@@ -26,3 +26,13 @@ variable "topic_name_subscription" {
   type        = string
   description = "A unique ID for this dataset, without the project name"
 }
+
+variable "repository_id" {
+  type        = string
+  description = "Artifact Registry name"
+}
+
+variable "service_account_id" {
+  type        = string
+  description = "Name of the IAM Service Account"
+}
