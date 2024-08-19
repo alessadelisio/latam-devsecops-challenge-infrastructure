@@ -11,7 +11,7 @@ jobs:
   terraform-apply:
     name: "Terraform Apply"
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'ready'
+    if: github.event.label.name == 'ready' # Simulation of an external's approval.
 
     permissions:
       pull-requests: write
@@ -54,8 +54,12 @@ jobs:
         run: make apply
 
         env:
-          TF_VAR_project_id: ${{ vars.project_id }}
-          TF_VAR_region: ${{ vars.region }}
+          TF_VAR_project_id: ${{ vars.TF_VAR_PROJECT_ID }}
+          TF_VAR_region: ${{ vars.TF_VAR_REGION }}
+          TF_VAR_table_id: ${{ vars.TF_VAR_TABLE_ID }}
+          TF_VAR_schema: ${{ vars.TF_VAR_SCHEMA }}
+          TF_VAR_topic_name: ${{ vars.TF_VAR_TOPIC_NAME }}
+          TF_VAR_topic_name_subscription: ${{ vars.TF_VAR_TOPIC_NAME_SUBSCRIPTION }}
 
       - name: "Remove 'ready' label if Apply fails"
         if: failure()
