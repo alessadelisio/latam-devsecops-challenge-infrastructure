@@ -1,17 +1,13 @@
-variable "project_id" {
-  description = "GCP project's id"
-  type        = string
-}
-
-variable "region" {
-  description = "GCP project's selected region"
-  type        = string
-}
-
 variable "table_id" {
   type        = string
   description = "Table name"
 }
+
+variable "project_id" {
+  type        = string
+  description = "Google Cloud Platform Project ID"
+}
+
 variable "schema" {
   type        = string
   description = "A unique ID for this dataset, without the project name"
