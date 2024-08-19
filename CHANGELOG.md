@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## v0.3.0 (2024-08-19)
+
+### Feature
+
+* feat: creating a Docker repository to store a CR Docker image and a Service Account for the CR.
+BREAKING CHANGE: new required variables for the &#39;devsecops_repository&#39; and the &#39;devsecops_service_account&#39; modules ([`b455c0e`](https://github.com/alessadelisio/latam-devsecops-challenge-infrastructure/commit/b455c0e449812c0f04ab43148b004c8faed0fba8))
+
+### Unknown
+
+* Merge pull request #8 from alessadelisio/develop
+
+Develop ([`a2a0165`](https://github.com/alessadelisio/latam-devsecops-challenge-infrastructure/commit/a2a01652af91a3c262f75a12f05041801d9ac931))
+
+* Merge pull request #7 from alessadelisio/feature/analytics-api
+
+Feature/analytics api ([`4497897`](https://github.com/alessadelisio/latam-devsecops-challenge-infrastructure/commit/449789793579dbac5ef29a8eef8d76d2c3c2eb69))
+
 ## v0.2.0 (2024-08-19)
 
 ### Ci
