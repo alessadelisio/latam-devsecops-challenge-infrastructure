@@ -12,8 +12,3 @@ variable "table_id" {
   description = "Table's id"
   type        = string
 }
-
-variable "dataset_id" {
-  description = "Dataset's id"
-  type        = string
-}

@@ -11,7 +11,6 @@ module "devsecops_bigquery" {
   project_id = var.project_id
   region     = var.region
   table_id   = var.table_id
-  dataset_id = var.dataset_id
 }
 
 module "devsecops_pubsub" {

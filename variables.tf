@@ -26,8 +26,3 @@ variable "topic_name_subscription" {
   type        = string
   description = "A unique ID for this dataset, without the project name"
 }
-
-variable "dataset_id" {
-  description = "Dataset's id"
-  type        = string
-}

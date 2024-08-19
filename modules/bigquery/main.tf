@@ -1,6 +1,6 @@
 resource "google_bigquery_dataset" "challenge_dataset" {
   project    = var.project_id
-  dataset_id = var.dataset_id
+  dataset_id = "devsecops_dataset"
   location   = var.region
 }
 
