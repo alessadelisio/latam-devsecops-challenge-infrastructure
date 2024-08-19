@@ -60,7 +60,7 @@ resource "google_bigquery_table" "challenge_table_view" {
       CAST(JSON_EXTRACT_SCALAR(CAST(data AS STRING), "$.EmpSalary") AS INT64) AS EmpSalary,
       JSON_EXTRACT_SCALAR(CAST(data AS STRING), "$.EmpPhoneNo") AS EmpPhoneNo
     FROM
-      ${var.project_id}.${google_bigquery_dataset.challenge_dataset.dataset_id}.${google_bigquery_table.challenge_table.table_id} ⁠
+      ${var.project_id}.${google_bigquery_dataset.challenge_dataset.dataset_id}.${google_bigquery_table.challenge_table.table_id}
     EOF
     use_legacy_sql = false
   }
