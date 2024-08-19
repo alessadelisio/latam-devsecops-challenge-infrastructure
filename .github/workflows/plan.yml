@@ -38,6 +38,8 @@ jobs:
           TF_VAR_schema: ${{ vars.TF_VAR_SCHEMA }}
           TF_VAR_topic_name: ${{ vars.TF_VAR_TOPIC_NAME }}
           TF_VAR_topic_name_subscription: ${{ vars.TF_VAR_TOPIC_NAME_SUBSCRIPTION }}
+          TF_VAR_repository_id: ${{ vars.TF_VAR_REPOSITORY_ID }}
+          TF_VAR_service_account_id: ${{ vars.TF_VAR_SERVICE_ACCOUNT_ID }}
 
       - name: "Save Artifact"
         id: save-artifact
